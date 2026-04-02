@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('audits', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users');
-            $table->string('action'); // create, update, delete
-            $table->string('model');  // Employee, User, etc.
+            $table->foreignId('user_id')->nullable()->constrained();
+            $table->string('event'); // login, logout, create, update, delete
+            $table->string('auditable_type')->nullable(); // Modelo afectado
+            $table->unsignedBigInteger('auditable_id')->nullable(); // ID del registro
             $table->json('old_values')->nullable();
             $table->json('new_values')->nullable();
-            $table->string('ip_address')->nullable();
+            $table->string('url');
+            $table->ipAddress('ip_address');
+            $table->string('user_agent');
             $table->timestamps();
         });
     }

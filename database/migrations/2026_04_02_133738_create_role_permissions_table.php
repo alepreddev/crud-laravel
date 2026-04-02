@@ -11,9 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('role_permissions', function (Blueprint $table) {
+        // Relación Muchos a Muchos entre Roles y Permisos
+        Schema::create('permission_role', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('role_id')->constrained()->onDelete('cascade');
+            $table->foreignId('permission_id')->constrained()->onDelete('cascade');
+        });
+
+        // Asignar Rol al Usuario
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('role_id')->nullable()->constrained();
         });
     }
 

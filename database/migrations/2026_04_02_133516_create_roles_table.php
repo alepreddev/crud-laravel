@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla de Roles (Admin, Supervisor, etc.)
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique(); // Ej: 'admin'
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

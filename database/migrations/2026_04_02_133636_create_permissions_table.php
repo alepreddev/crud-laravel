@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla de Permisos (acciones específicas)
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique(); // Ej: 'employees.create'
+            $table->string('description');
+            $table->string('module'); // Ej: 'empleados'
             $table->timestamps();
         });
     }
