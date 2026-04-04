@@ -1,45 +1,26 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/modules/login.css') }}">
 </head>
-<body class="login-page">
-    <div class="login-card">
-        <form id="loginForm">
-            <input type="email" name="email" placeholder="Correo" required>
-            <input type="password" name="password" placeholder="Contraseña" required>
-            <button type="submit">Entrar</button>
-        </form>
-        <div id="error-msg" style="color: red;"></div>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <h2><i class="fi fi-rr-lock"></i> Acceso</h2>
+            <form id="loginForm">
+                <input type="email" name="email" placeholder="Usuario (Email)" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <button type="submit" class="btn-login">Entrar</button>
+            </form>
+        </div>
     </div>
 
-    <script>
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        
-        try {
-            const response = await fetch('/login', {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                    'Accept': 'application/json'
-                },
-                body: formData
-            });
+{{-- @push('scripts') --}}
+    <script type="module" src="{{ asset('js/modules/login.js') }}"></script>
+{{-- @endpush --}}
 
-            const data = await response.json();
-
-            if (data.success) {
-                window.location.href = data.redirect;
-            } else {
-                document.getElementById('error-msg').innerText = data.message;
-            }
-        } catch (error) {
-            console.error('Error en la petición');
-        }
-    });
-    </script>
 </body>
 </html>

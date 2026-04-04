@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\EmployeeController;
 // Rutas públicas
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -17,4 +17,22 @@ Route::middleware(['auth'])->group(function () {
     });
     
     // Aquí irán los módulos de empleados y usuarios
+});
+
+Route::middleware(['auth'])->group(function () {
+
+    // Módulo Empleados - Protegido por permiso de acceso
+    // Route::middleware(['can:employees.index'])->group(function () {
+    //     Route::get('/empleados', [EmployeeController::class, 'index']);
+    //     Route::post('/empleados/store', [EmployeeController::class, 'store'])->middleware('can:employees.create');
+    // });
+
+    // Módulo Empleados
+    Route::prefix('employees')->group(function () {
+        Route::get('/', [EmployeeController::class, 'index'])->name('employees.index');
+        Route::get('/list', [EmployeeController::class, 'list']); // Para cargar la tabla vía JS
+        Route::post('/store', [EmployeeController::class, 'store']);
+        Route::put('/{employee}', [EmployeeController::class, 'update']);
+        Route::delete('/{employee}', [EmployeeController::class, 'destroy']);
+    });
 });
