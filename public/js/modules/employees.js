@@ -1,16 +1,27 @@
-// // Ejemplo: Guardar Empleado
-async function saveEmployee() {
+import * as Utils from '../main.js';
+// Ejemplo: Guardar Empleado
+// alert('modulo de empleados');
+document.getElementById('employeeForm').addEventListener('submit', async (e) => {
+
+    e.preventDefault();
+
     const data = {
         id_number: document.getElementById('dni').value,
         first_name: document.getElementById('nombre').value,
-        // ... otros campos
-    };
+        // ... otros campos        
+        last_name: document.getElementById('apellido').value,
+        email: document.getElementById('email').value,
+        hire_date: document.getElementById('hire_date').value,
+};
 
-    const result = await apiFetch('/employees/store', 'POST', data);
+    const result = await Utils.apiFetch('/employees/store', 'POST', data);
     if (result && result.success) {
-        location.reload(); // O mejor: actualiza la tabla dinámicamente con JS
+
+        // location.reload(); // O mejor: actualiza la tabla dinámicamente con JS
     }
-}
+    console.log(result);
+})
+
 
 async function confirmDelete(id) {
     if (!confirm('¿Estás seguro de eliminar este empleado? Esta acción se auditará.')) return;
@@ -38,5 +49,3 @@ async function confirmDelete(id) {
     }
 }
 
-function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-function closeModal(id) { document.getElementById(id).style.display = 'none'; }

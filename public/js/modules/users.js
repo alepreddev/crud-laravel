@@ -16,3 +16,6 @@ document.getElementById('userForm').addEventListener('submit', async (e) => {
         alert("Error al crear el usuario. Revisa los datos o permisos.");
     }
 });
+
+function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }

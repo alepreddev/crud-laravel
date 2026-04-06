@@ -16,7 +16,7 @@
         <div class="login-card">
             <h2>
                 {{-- <i class="fi fi-rr-lock"></i> --}}
-                Acceso
+                Sistema de empleados
             </h2>
             <form id="loginForm">
                 <input type="email" name="email" placeholder="Usuario (Email)" required>
