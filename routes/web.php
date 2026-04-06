@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\AuditController;
 // Rutas públicas
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -11,11 +12,11 @@ Route::post('/login', [AuthController::class, 'login']);
 // Rutas protegidas
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    
+
     Route::get('/dashboard', function () {
         return view('dashboard');
-    });
-    
+    })->middleware(['auth'])->name('dashboard');
+
     // Aquí irán los módulos de empleados y usuarios
 });
 
@@ -35,4 +36,8 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/{employee}', [EmployeeController::class, 'update']);
         Route::delete('/{employee}', [EmployeeController::class, 'destroy']);
     });
+
+    // Modulo de auditoria
+    Route::get('/auditoria', [AuditController::class, 'index'])->name('auditoria.index');
+    Route::get('/auditoria/{audit}', [AuditController::class, 'show']);
 });

@@ -7,14 +7,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     btn.innerText = 'Verificando...';
 
     try {
-        // const response = await fetch('/login', {
-        //     method: 'POST',
-        //     headers: {
-        //         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-        //         'Accept': 'application/json'
-        //     },
-        //     body: formData
-        // });
+
         const dataform = {
             email: document.querySelector('input[name="email"]').value,
             password: document.querySelector('input[name="password"]').value
@@ -22,7 +15,10 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         
         const response = await apiFetch('/login', 'POST', dataform);
 
-        const data = await response.json();
+        const data = response;
+
+        console.log(response);
+        console.log(data);
 
         if (data.success) {
             window.location.href = data.redirect;

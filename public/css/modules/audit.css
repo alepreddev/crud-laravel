@@ -1,0 +1,27 @@
+/* Colores de Eventos */
+.badge-event {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+}
+
+.badge-event.login { background-color: #3498db; }
+.badge-event.create { background-color: #27ae60; }
+.badge-event.update { background-color: #f39c12; }
+.badge-event.delete { background-color: #e74c3c; }
+.badge-event.logout { background-color: #7f8c8d; }
+
+.json-block {
+    background: #2d3436;
+    color: #fab1a0;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.modal-content.wide {
+    width: 600px;
+}
